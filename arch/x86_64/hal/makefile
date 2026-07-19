@@ -1,0 +1,1 @@
+C_SRC += arch/$(ARCH)/hal/hal_console_impl.c

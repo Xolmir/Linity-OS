@@ -1,0 +1,1 @@
+C_SRC += kernel/panic/panic.c

@@ -1,0 +1,1 @@
+C_SRC += kernel/core/kernel.c

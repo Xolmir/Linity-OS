@@ -1,0 +1,6 @@
+build/
+iso/
+
+*.iso
+
+toolchain/limine-binary
