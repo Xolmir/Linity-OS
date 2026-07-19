@@ -5,37 +5,41 @@
 | Architecture | Status | Boot Protocol |
 |---|---|---|
 | x86_64 | In development | Limine |
-## Proje Durumu
 
-Proje aktif geliştirme aşamasındadır. Şu anda bellek yönetimi üzerinde çalışıyorum.
-## Proje Hedefleri
+## Project Status
 
-* Çoklu mimari desteği
-* İşletim sistemi mantığını anlamak
-* POSIX desteği
-* UNIX felsefesine sadık kalmak
-* DOOM çalıştırmak
+The project is under active development. I am currently working on memory management.
 
-## Planlanan Bileşenler
-* Memory Management Unit
+## Project Goals
+
+* Support multiple architectures
+* Understand how operating systems work
+* Provide POSIX support
+* Stay true to the UNIX philosophy
+* Run DOOM
+
+## Planned Components
+
+* PMM
+* VMM
 * Scheduler
 * Driver Support
 * Basic Drivers
 * Shell
 * POSIX Support
 
-## Kaynak Kodunu İndirme
+## Getting the Source Code
 
-Projeyi Git ile klonlayın:
+Clone the project using Git:
 
 ```bash
 git clone https://github.com/Xolmir/Linity-OS.git
 cd Linity-OS
 ```
 
-## Gereksinimler
+## Requirements
 
-Projeyi derlemek için aşağıdaki araçlara ihtiyaç vardır:
+The following tools are required to build the project:
 
 * GCC
 * GNU ld
@@ -48,36 +52,37 @@ Projeyi derlemek için aşağıdaki araçlara ihtiyaç vardır:
 * make
 
 > [!NOTE]
-> Eğer kullandığınız derleyici araçları hedef mimari için kod üretemiyorsa, `gcc`, `ld` ve `objcopy` araçlarını uygun cross-compiler sürümleriyle değiştirmeniz gerekebilir.
+> If your compiler tools cannot generate code for the target architecture, you may need to replace `gcc`, `ld`, and `objcopy` with the appropriate cross-compiler versions.
 
-## Make Hedefleri
+## Make Targets
 
-| Komut         | Açıklama                                                   |
-| ------------- | ---------------------------------------------------------- |
-| `make`        | Projeyi derler                                             |
-| `make run`    | İşletim sistemini QEMU ile çalıştırır                      |
-| `make kernel` | Yalnızca çekirdeği derler                                  |
-| `make iso`    | Önyüklenebilir ISO dosyasını oluşturur                     |
-| `make doctor` | Eksik geliştirme araçlarını ve bağımlılıkları kontrol eder |
-| `make clean`  | Derleme sonucunda oluşturulan dosyaları temizler           |
+| Command | Description |
+|---|---|
+| `make` | Builds the project |
+| `make run` | Runs the operating system in QEMU |
+| `make kernel` | Builds only the kernel |
+| `make iso` | Creates a bootable ISO image |
+| `make doctor` | Checks for missing development tools and dependencies |
+| `make clean` | Removes generated build files |
 
-## Proje Dizinleri ve Dosyaları
+## Project Directories and Files
 
-| Dizin         | Açıklama                                                   |
-| ------------- | ---------------------------------------------------------- |
-| `arch/` | Mimariye özel kodları içerir |
-| `boot/` | Önyükleme için kullanılacak mimariye özel dosyaları içerir |
-| `include/` | Mimariye ve çekirdeğe ait başlık dosyalarını içerir |
-| `kernel/` | Mümkün olduğunca donanımdan bağımsız çekirdek kodlarını içerir |
-| `toolchain/` | Gerekli araç zincirleri bu dizine indirilir |
-| `makefile` | Ana derleme dosyası |
+| Directory or File | Description |
+|---|---|
+| `arch/` | Contains architecture-specific code |
+| `boot/` | Contains architecture-specific files used during boot |
+| `include/` | Contains header files for the architectures and the kernel |
+| `kernel/` | Contains kernel code that is kept as hardware-independent as possible |
+| `toolchain/` | Toolchains required by the project are downloaded into this directory |
+| `makefile` | Main build file |
 
-## Kullanım Uyarısı
+## Usage Warning
+
 > [!WARNING]
-> Linity OS henüz günlük kullanım için uygun değil. Gerçek donanımda test etmek tamamen sizin sorumluluğunuzdadır.
+> Linity OS is not yet suitable for daily use. Testing it on real hardware is entirely your responsibility.
 
-## Lisans
+## License
 
-Bu proje **GNU General Public License v3.0** altında lisanslanmıştır.
+This project is licensed under the **GNU General Public License v3.0**.
 
-Ayrıntılı bilgi için [`LICENSE`](LICENSE) dosyasına bakabilirsiniz.
+See the [`LICENSE`](LICENSE) file for more information.
