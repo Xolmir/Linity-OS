@@ -15,6 +15,7 @@
 #include <boot/early_isr.h>
 #include <boot/early_pit.h>
 #include <boot/early_idt.h>
+#include <hal/hal_cpu.h>
 
 #define EARLY_IDT_SIZE      32
 #define EARLY_IDT_PRESENT   (1 << 7)
@@ -56,6 +57,7 @@ static void idt_set_descriptor(uint8_t vector, void* isr, uint8_t flags) {
 }
 
 void early_idt_init(void) {
+    hal_cpu_irq_disable();
     idtr.base  = (uintptr_t)&idt[0];
     idtr.limit = (uint16_t)sizeof(idt_entry_t) * EARLY_IDT_SIZE - 1;
 

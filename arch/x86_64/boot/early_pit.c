@@ -16,6 +16,7 @@
 #include <boot/early_pit.h>
 #include <boot/early_pic.h>
 #include <panic.h>
+#include <hal/hal_cpu.h>
 
 #define EARLY_PIT_PORT_CH2    0x42
 #define EARLY_PIT_PORT_CMD    0x43
@@ -30,7 +31,7 @@
 #define EARLY_PIT_ACC_LOHI    (0x03 << 4)
 
 uint64_t early_calculate_tsc_freq(uint16_t pit_poll_val) {
-    __asm__ volatile ("cli");
+    hal_cpu_irq_disable();
 
     outb(EARLY_PIT_PORT_CMD, 
         EARLY_PIT_SEL_CH2 |
@@ -39,13 +40,14 @@ uint64_t early_calculate_tsc_freq(uint16_t pit_poll_val) {
 
     outb(EARLY_PIT_PORT_CH2, (uint8_t)(pit_poll_val & 0xFF));
     outb(EARLY_PIT_PORT_CH2, (uint8_t)((pit_poll_val >> 8) & 0xFF));
-
-    uint64_t first_tsc = rdtsc();
     
     uint8_t speaker = inb(EARLY_PIT_PORT_SPK);
     
     speaker &= ~(EARLY_PIT_SPK_GATE | EARLY_PIT_SPK_DATA);
     outb(EARLY_PIT_PORT_SPK, speaker);
+    
+    uint64_t first_tsc = rdtsc();
+    
     speaker |= EARLY_PIT_SPK_GATE;
     outb(EARLY_PIT_PORT_SPK, speaker);
 

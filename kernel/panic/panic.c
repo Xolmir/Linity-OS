@@ -13,10 +13,11 @@
 #include <kstatus.h>
 #include <panic.h>
 #include <printk.h>
+#include <hal/hal_cpu.h>
 
 __attribute__((noreturn))
 void panic(const char* fmt, ...) {
-    __asm__ volatile ("cli");
+    hal_cpu_irq_disable();
     switch (kernel_state) {
         case KSTATUS_EARLY:
         case KSTATUS_EARLY_PANIC: {
@@ -39,7 +40,6 @@ void panic(const char* fmt, ...) {
             break;
     }
 
-    for (;;) {
-        __asm__ volatile ("cli; hlt");
-    }
+    hal_cpu_halt();
+    while(1);
 }
