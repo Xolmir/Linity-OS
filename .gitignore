@@ -4,3 +4,4 @@ iso/
 *.iso
 
 toolchain/limine-binary
+.vscode
