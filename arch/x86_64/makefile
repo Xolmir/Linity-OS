@@ -44,7 +44,7 @@ XORRISOFLAGS += >/dev/null 2>&1
 
 QEMUFLAGS  = -m 4G -cpu host,+invtsc -enable-kvm
 QEMUFLAGS += -cdrom $(ISO)
-QEMUFLAGS += -vga virtio -serial stdio -display none -debugcon file:linity.log
+QEMUFLAGS += -vga std -serial stdio -display none -debugcon file:linity.log
 
 include arch/$(ARCH)/boot/makefile
 include arch/$(ARCH)/hal/makefile

@@ -16,6 +16,6 @@
 
 #include <stdint.h>
 
-void check_limine(void);
+void validate_boot_protocol(void);
 
 #endif // EARLY_LIMINE_H

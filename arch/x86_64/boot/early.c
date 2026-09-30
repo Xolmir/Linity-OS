@@ -18,19 +18,21 @@
 #include <boot/early_idt.h>
 #include <boot/early_pic.h>
 #include <boot/early_pit.h>
+#include <hal/hal_cpu.h>
 
 extern void kernel_main(void);
 
 void early_main(void);
 
 void early_main(void) {
-    check_limine();
+    hal_cpu_irq_disable();
 
     kernel_state = KSTATUS_EARLY;
+
+    validate_boot_protocol();
     
     if(early_init_serial()) {
-        kernel_state = KSTATUS_EARLY_PANIC;
-        panic("Early serial initialization failed.");
+        printk("Early serial initialization failed.");
     }
     printk("Reset\n");
     printk("KSTATUS = %d\n", kernel_state);
@@ -47,8 +49,8 @@ void early_main(void) {
     uint64_t cpu_freq = early_calculate_tsc_freq(0xFFFF);
     uint64_t cpu_freq_ghz = (cpu_freq / 1000000000);
     uint64_t cpu_freq_mhz = (cpu_freq % 1000000000) / 1000000;
-    printk("CPU Ghz : %llu.%llu Ghz\n", cpu_freq_ghz, cpu_freq_mhz);
-    printk("CPU Hz : %llu Hz\n", cpu_freq);
+    printk("CPU Ghz : %lu.%lu Ghz\n", cpu_freq_ghz, cpu_freq_mhz);
+    printk("CPU Hz : %lu Hz\n", cpu_freq);
 
     kernel_main();
 }

@@ -63,28 +63,28 @@ __attribute__((interrupt)) void early_reserved_exp(void* frame) {
 }
 
 __attribute__((interrupt)) void early_double_fault_exp(void* frame, unsigned long int error_code) {
-    panic("Double fault exception, error code: %llu", error_code);
+    panic("Double fault exception, error code: %lu", error_code);
 }
 __attribute__((interrupt)) void early_invalid_tss_exp(void* frame, unsigned long int error_code) {
-    panic("Invalid TSS exception, error code: %llu", error_code);
+    panic("Invalid TSS exception, error code: %lu", error_code);
 }
 __attribute__((interrupt)) void early_segment_not_present_exp(void* frame, unsigned long int error_code) {
-    panic("Segment not present exception, error code: %llu", error_code);
+    panic("Segment not present exception, error code: %lu", error_code);
 }
 __attribute__((interrupt)) void early_stack_seg_exp(void* frame, unsigned long int error_code) {
-    panic("Stack segment fault exception, error code: %llu", error_code);
+    panic("Stack segment fault exception, error code: %lu", error_code);
 }
 __attribute__((interrupt)) void early_general_protect_exp(void* frame, unsigned long int error_code) {
-    panic("General protection fault exception, error code: %llu", error_code);
+    panic("General protection fault exception, error code: %lu", error_code);
 }
 __attribute__((interrupt)) void early_page_fault_exp(void* frame, unsigned long int error_code) {
-    panic("Page fault exception, error code: %llu", error_code);
+    panic("Page fault exception, error code: %lu", error_code);
 }
 __attribute__((interrupt)) void early_alignment_exp(void* frame, unsigned long int error_code) {
-    panic("Alignment check exception, error code: %llu", error_code);
+    panic("Alignment check exception, error code: %lu", error_code);
 }
 __attribute__((interrupt)) void early_control_protect_exp(void* frame, unsigned long int error_code) {
-    panic("Control protection exception, error code: %llu", error_code);
+    panic("Control protection exception, error code: %lu", error_code);
 }
 
 void early_get_all_exp_func(uintptr_t* isr_vector_table) {
