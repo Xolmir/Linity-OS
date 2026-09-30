@@ -11,7 +11,9 @@
 
 #include <hal/hal_console.h>
 #include <boot/early_serial.h>
+#include <io.h>
 
 void early_arch_debug_putc(char character) {
     early_serial_write_char(character);
+    outb(0xE9, character);
 }

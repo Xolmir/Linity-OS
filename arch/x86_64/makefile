@@ -28,7 +28,7 @@ KERNEL_CFLAGS	= -Iinclude/kernel
 
 COMMON_CFLAGS  = -m64 -mcmodel=kernel -mgeneral-regs-only
 COMMON_CFLAGS += -ffreestanding -fno-builtin -nostdlib
-COMMON_CFLAGS += -fno-PIC -fno-stack-protector -fno-stack-check -fno-omit-frame-pointer
+COMMON_CFLAGS += -fno-PIC -fno-PIE -fno-stack-protector -fno-stack-check -fno-omit-frame-pointer
 COMMON_CFLAGS += -mno-sse -mno-sse2 -mno-mmx -mno-80387 -mno-red-zone
 COMMON_CFLAGS += -Wall -Wmissing-prototypes -Wmissing-declarations
 COMMON_CFLAGS += -O0 -g -fdiagnostics-color=always
@@ -44,7 +44,7 @@ XORRISOFLAGS += >/dev/null 2>&1
 
 QEMUFLAGS  = -m 4G -cpu host,+invtsc -enable-kvm
 QEMUFLAGS += -cdrom $(ISO)
-QEMUFLAGS += -vga virtio -serial stdio -display none
+QEMUFLAGS += -vga virtio -serial stdio -display none -debugcon file:linity.log
 
 include arch/$(ARCH)/boot/makefile
 include arch/$(ARCH)/hal/makefile
